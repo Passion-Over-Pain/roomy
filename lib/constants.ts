@@ -1,10 +1,18 @@
-export const PUTER_WORKER_URL = import.meta.env.VITE_PUTER_WORKER_URL || "";
+export const PUTER_WORKER_URL = (() => {
+  const url = import.meta.env.VITE_PUTER_WORKER_URL;
+  if (!url) {
+    throw new Error(
+      "Missing required environment variable: VITE_PUTER_WORKER_URL",
+    );
+  }
+  return url;
+})();
 
 // Storage Paths
 export const STORAGE_PATHS = {
-  ROOT: "roomify",
-  SOURCES: "roomify/sources",
-  RENDERS: "roomify/renders",
+  ROOT: "roomy",
+  SOURCES: "roomy/sources",
+  RENDERS: "roomy/renders",
 } as const;
 
 // Timing Constants (in milliseconds)
@@ -19,7 +27,7 @@ export const GRID_OVERLAY_SIZE = "60px 60px";
 export const GRID_COLOR = "#3B82F6";
 
 // HTTP Status Codes
-export const UNAUTHORIZED_STATUSES = [401, 403];
+export const AUTH_ERROR_STATUSES = [401, 403] as const;
 
 // Image Dimensions
 export const IMAGE_RENDER_DIMENSION = 1024;
