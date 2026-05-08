@@ -1,12 +1,17 @@
-export const PUTER_WORKER_URL = (() => {
-  const url = import.meta.env.VITE_PUTER_WORKER_URL;
+export const PUTER_WORKER_URL = import.meta.env.VITE_PUTER_WORKER_URL || "";
+
+export const getPuterWorkerUrl = (): string => {
+  const url = PUTER_WORKER_URL;
   if (!url) {
+    console.error(
+      "Missing required environment variable: VITE_PUTER_WORKER_URL. Check your .env file.",
+    );
     throw new Error(
       "Missing required environment variable: VITE_PUTER_WORKER_URL",
     );
   }
   return url;
-})();
+};
 
 // Storage Paths
 export const STORAGE_PATHS = {
