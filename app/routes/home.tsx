@@ -3,8 +3,9 @@ import type { Route } from "./+types/home";
 import Navbar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import Upload from "@/components/upload";
-import { useState } from "react";
-import { createProject } from "@/lib/puter.action";
+import { useEffect, useRef, useState } from "react";
+import { createProject, getProjects } from "@/lib/puter.action";
+import { useNavigate } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -15,30 +16,46 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   const [projects, setProjects] = useState<DesignItem[]>([]);
+  const isCreatingProjectRef = useRef(false);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const fetchedProjects = await getProjects();
+      setProjects(fetchedProjects!);
+    };
+
+    fetchProjects();
+  }, []);
   const handleCreateProject = async (
     base64Image: string,
   ): Promise<DesignItem | false> => {
-    const newId = Date.now().toString();
+    try {
+      if (isCreatingProjectRef.current) return false;
+      isCreatingProjectRef.current = true;
+      const newId = Date.now().toString();
 
-    const newItem: DesignItem = {
-      id: newId,
-      name: `Residence ${newId}`,
-      sourceImage: base64Image,
-      renderedImage: undefined,
-      timestamp: Date.now(),
-    };
+      const newItem: DesignItem = {
+        id: newId,
+        name: `Residence ${newId}`,
+        sourceImage: base64Image,
+        renderedImage: undefined,
+        timestamp: Date.now(),
+      };
 
-    const saved = await createProject({
-      item: newItem,
-      visibility: "private",
-    });
+      const saved = await createProject({
+        item: newItem,
+        visibility: "private",
+      });
 
-    if (!saved) return false;
+      if (!saved) return false;
 
-    setProjects((prev) => [saved, ...prev]);
+      setProjects((prev) => [saved, ...prev]);
 
-    return saved;
+      return saved;
+    } finally {
+      isCreatingProjectRef.current = false;
+    }
   };
 
   return (
@@ -107,10 +124,14 @@ export default function Home() {
 
           <div className="projects-grid">
             {projects.map((project) => (
-              <div key={project.id} className="project-card group">
+              <div
+                key={project.id}
+                className="project-card group"
+                onClick={() => navigate(`/visualizer/${project.id}`)}
+              >
                 <div className="preview">
                   <img
-                    src={project.sourceImage}
+                    src={project.renderedImage || project.sourceImage}
                     alt={project.name || "Project"}
                   />
 
