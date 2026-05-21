@@ -1,6 +1,6 @@
 export function AboutUs() {
   return (
-    <section className="py-32 bg-white">
+    <section className="py-32 bg-white" id="about">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           {/* Images on the Left */}
