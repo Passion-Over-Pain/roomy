@@ -15,6 +15,7 @@ import {
   signIn as puterSignIn,
   signOut as puterSignOut,
 } from "@/lib/puter.action";
+import { Footer } from "@/components/ui/footer";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -45,6 +46,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <ScrollRestoration />
+        <Footer />
         <Scripts />
       </body>
     </html>

@@ -26,16 +26,19 @@ const Navbar = () => {
     <header className="navbar">
       <nav className="inner">
         <div className="left">
-          <div className="brand">
-            <div className="logo flex items-center justify-center">
-              <Box size={20} />
+          <a href="/#">
+            <div className="brand">
+              <div className="logo flex items-center justify-center border border-black p-2">
+                <Box size={20} />
+              </div>
+              <span className="name">Roomy</span>
             </div>
-            <span className="name">Roomy</span>
-          </div>
+          </a>
           <ul className="links">
+            <a href="#about">About</a>
             <a href="#features">Features</a>
             <a href="#workflow">Workflow</a>
-            <a href="#pricing">Pricing</a>
+            <a href="#gallery">Gallery</a>
             <a href="#community">Community</a>
           </ul>
         </div>

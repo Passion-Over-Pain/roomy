@@ -8,6 +8,11 @@ import { createProject, getProjects } from "@/lib/puter.action";
 import { useNavigate } from "react-router";
 import { Hero } from "@/components/sections/hero";
 import { AboutUs } from "@/components/sections/about";
+import { Features } from "@/components/sections/features";
+import { Workflow } from "@/components/sections/workflow";
+import { Gallery } from "@/components/sections/gallery";
+import { Community } from "@/components/community";
+import { Cta } from "@/components/sections/cta";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -65,8 +70,13 @@ export default function Home() {
       <Navbar />
       <Hero />
       <AboutUs />
+      <Features />
+      <Workflow />
+      <Gallery />
+      <Community />
+      <Cta />
 
-      <section className="projects">
+      {/* <section className="projects">
         <div className="section-inner">
           <div className="section-head">
             <div className="copy">
@@ -119,7 +129,7 @@ export default function Home() {
               ))}
           </div>
         </div>
-      </section>
+      </section> TODO: COME BACK TO THIS */}
     </div>
   );
 }
