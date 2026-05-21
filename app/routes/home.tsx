@@ -6,10 +6,12 @@ import Upload from "@/components/upload";
 import { useEffect, useRef, useState } from "react";
 import { createProject, getProjects } from "@/lib/puter.action";
 import { useNavigate } from "react-router";
+import { Hero } from "@/components/sections/hero";
+import { AboutUs } from "@/components/sections/about";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Roomy" },
+    { title: "Roomy | Architectural Design Software" },
     { name: "description", content: "Welcome to Roomy" },
   ];
 }
@@ -61,53 +63,8 @@ export default function Home() {
   return (
     <div className="home">
       <Navbar />
-
-      <section className="hero">
-        <div className="announce">
-          <div className="dot">
-            <div className="pulse"></div>
-          </div>
-
-          <p>Introducing Roomy 2.0</p>
-        </div>
-
-        <h1 className="title">
-          Build beautiful spaces at the speed of thought with Roomy
-        </h1>
-
-        <p className="subtitle">
-          Roomy is an AI-first design environment that helps you visaulize,
-          render and ship architectural projects faster than ever
-        </p>
-
-        <div className="actions">
-          <a href="#upload" className="cta">
-            Start Building <ArrowRight className="icon" />
-          </a>
-
-          <Button variant="ghost" size="lg">
-            Watch Demo
-          </Button>
-        </div>
-
-        <div id="upload" className="upload-shell">
-          <div className="grid-overlay" />
-
-          <div className="upload-card">
-            <div className="upload-head">
-              <div className="upload-icon">
-                <Layers className="icon" />
-              </div>
-
-              <h3>Upload your floor plan</h3>
-
-              <p>Supports JPG, PNG and WEBP formats up to 10 MBs</p>
-            </div>
-
-            <Upload onCreateProject={handleCreateProject} />
-          </div>
-        </div>
-      </section>
+      <Hero />
+      <AboutUs />
 
       <section className="projects">
         <div className="section-inner">
@@ -123,42 +80,43 @@ export default function Home() {
           </div>
 
           <div className="projects-grid">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className="project-card group"
-                onClick={() => navigate(`/visualizer/${project.id}`)}
-              >
-                <div className="preview">
-                  <img
-                    src={project.renderedImage || project.sourceImage}
-                    alt={project.name || "Project"}
-                  />
+            {projects &&
+              projects.map((project) => (
+                <div
+                  key={project.id}
+                  className="project-card group"
+                  onClick={() => navigate(`/visualizer/${project.id}`)}
+                >
+                  <div className="preview">
+                    <img
+                      src={project.renderedImage || project.sourceImage}
+                      alt={project.name || "Project"}
+                    />
 
-                  <div className="badge">
-                    <span>Private</span>
-                  </div>
-                </div>
-
-                <div className="card-body">
-                  <div>
-                    <h3>{project.name}</h3>
-
-                    <div className="meta">
-                      <Clock size={12} />
-
-                      <span>
-                        {new Date(project.timestamp).toLocaleDateString()}
-                      </span>
+                    <div className="badge">
+                      <span>Private</span>
                     </div>
                   </div>
 
-                  <div className="arrow">
-                    <ArrowUpRight size={18} />
+                  <div className="card-body">
+                    <div>
+                      <h3>{project.name}</h3>
+
+                      <div className="meta">
+                        <Clock size={12} />
+
+                        <span>
+                          {new Date(project.timestamp).toLocaleDateString()}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="arrow">
+                      <ArrowUpRight size={18} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </section>

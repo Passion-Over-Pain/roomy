@@ -1,7 +1,8 @@
+// app/components/ui/button.tsx
 import React from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   fullWidth?: boolean;
   className?: string;
@@ -20,11 +21,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const classNames = [
-      "cursor-pointer",
       "btn",
       `btn--${variant}`,
       `btn--${size}`,
-      fullWidth && "btn--full-width",
+      fullWidth ? "btn--full" : "",
       className,
     ]
       .filter(Boolean)
