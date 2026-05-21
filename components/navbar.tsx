@@ -1,64 +1,67 @@
 import { Box } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useOutletContext } from "react-router";
-const navbar = () => {
+
+const Navbar = () => {
   const { isSignedIn, userName, signIn, signOut } =
     useOutletContext<AuthContext>();
+
   const handleAuthClick = async () => {
     if (isSignedIn) {
       try {
         await signOut();
       } catch (e) {
-        console.error("Puter  sign out failed:", e);
+        console.error("Sign out failed:", e);
       }
-      return;
     } else {
       try {
         await signIn();
       } catch (e) {
-        console.error("Puter sign in failed:", e);
+        console.error("Sign in failed:", e);
       }
     }
   };
+
   return (
     <header className="navbar">
       <nav className="inner">
         <div className="left">
           <div className="brand">
-            <Box size={24} className="logo" />
+            <div className="logo flex items-center justify-center">
+              <Box size={20} />
+            </div>
             <span className="name">Roomy</span>
           </div>
           <ul className="links">
-            <a href="">Product</a>
-            <a href="">Pricing</a>
-            <a href="">Community</a>
-            <a href="">Enterprise</a>
+            <a href="#features">Features</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#community">Community</a>
           </ul>
         </div>
+
         <div className="actions">
           {isSignedIn ? (
             <>
               <span className="greeting">
-                {userName ? `Hi ${userName}` : "Signed In"}!
+                {userName ? `Hi ${userName}` : "Signed In"}
               </span>
-              <Button size="sm" onClick={handleAuthClick} className="btn">
+              <Button size="sm" variant="outline" onClick={handleAuthClick}>
                 Log out
               </Button>
             </>
           ) : (
             <>
+              <button className="login" onClick={handleAuthClick}>
+                Sign In
+              </button>
               <Button
-                className="login"
-                onClick={handleAuthClick}
-                size="sm"
-                variant="ghost"
+                size="md"
+                className="btn--primary"
+                onClick={() => (window.location.href = "#upload")}
               >
-                {" "}
-                Login
+                Start Building
               </Button>
-              <a href="#upload" className="cta">
-                Get Started
-              </a>
             </>
           )}
         </div>
@@ -67,4 +70,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default Navbar;
