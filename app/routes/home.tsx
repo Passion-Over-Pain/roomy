@@ -1,11 +1,11 @@
 import type { Route } from "./+types/home";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/shared/navbar";
 import { Hero } from "@/components/sections/hero";
 import { AboutUs } from "@/components/sections/about";
 import { Features } from "@/components/sections/features";
 import { Workflow } from "@/components/sections/workflow";
 import { Gallery } from "@/components/sections/gallery";
-import { Community } from "@/components/community";
+import { Community } from "@/components/sections/community";
 import { Cta } from "@/components/sections/cta";
 
 export function meta({}: Route.MetaArgs) {

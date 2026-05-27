@@ -125,3 +125,20 @@ interface Generate3DViewParams {
   sourceImage: string;
   projectId?: string | null;
 }
+
+type DialogVariant = "alert" | "confirm" | "modal";
+
+interface DialogOptions {
+  title: string;
+  description?: string;
+  confirmText?: string;
+  cancelText?: string;
+  defaultValue?: string; // for modal input default
+  onConfirm?: (inputValue?: string) => void;
+  onCancel?: () => void;
+}
+
+interface DialogState extends DialogOptions {
+  open: boolean;
+  variant: DialogVariant;
+}
