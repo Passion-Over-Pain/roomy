@@ -503,7 +503,11 @@
 
       &.compare {
         .compare-stage {
-          @apply bg-[#f7f7f7] overflow-hidden;
+          @apply w-full aspect-16/10 bg-[#f7f7f7] overflow-hidden;
+        }
+
+        .compare-stage img {
+          @apply object-contain;
         }
       }
     }

@@ -17,6 +17,7 @@ import {
 } from "@/lib/puter.action";
 import { Footer } from "@/components/ui/footer";
 import { Toaster } from "sonner";
+import { DialogRenderer } from "@/components/shared/dialog-renderer";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -46,6 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Toaster position="top-right" richColors />
+        <DialogRenderer />
         {children}
         <ScrollRestoration />
         <Footer />

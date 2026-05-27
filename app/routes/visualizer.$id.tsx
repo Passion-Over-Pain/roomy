@@ -1,3 +1,4 @@
+import { toastService } from "@/components/shared/toast-service";
 import { Button } from "@/components/ui/button";
 import { generate3DView } from "@/lib/ai.action";
 import {
@@ -5,6 +6,7 @@ import {
   getProjectById,
   deleteProject,
 } from "@/lib/puter.action";
+import { dialogService } from "@/lib/services/dialog-service";
 import { Box, Download, RefreshCcw, Share2, X, OctagonX } from "lucide-react";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -36,6 +38,10 @@ const Visualizer = () => {
 
   const handleBack = () => {
     navigate("/");
+  };
+
+  const handleShare = () => {
+    toastService.info("Shareable link functionality coming soon.");
   };
 
   const handleExport = async () => {
@@ -100,17 +106,26 @@ const Visualizer = () => {
   };
 
   const handleDelete = async () => {
-    if (!id || !confirm("Are you sure? This action cannot be undone.")) return;
+    if (!id) return;
+    dialogService.confirm({
+      title: "Delete Project",
+      description:
+        "Are you sure you want to delete this project? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+      onConfirm: async () => {
+        setIsDeleting(true);
+        const success = await deleteProject(id);
 
-    setIsDeleting(true);
-    const success = await deleteProject(id);
-
-    if (success) {
-      navigate("/studio/floor-to-3d");
-    } else {
-      alert("Failed to delete project.");
-      setIsDeleting(false);
-    }
+        if (success) {
+          toastService.success("Project deleted successfully.");
+          navigate("/studio/floor-to-3d");
+        } else {
+          toastService.error("Failed to delete project.");
+          setIsDeleting(false);
+        }
+      },
+    });
   };
 
   useEffect(() => {
@@ -212,7 +227,7 @@ const Visualizer = () => {
                 Export
               </Button>
 
-              <Button size="sm" onClick={() => {}} className="share">
+              <Button size="sm" onClick={handleShare} className="share">
                 <Share2 className="w-4 h-4 mr-2" />
                 Share
               </Button>
@@ -265,19 +280,20 @@ const Visualizer = () => {
             {project?.sourceImage && currentImage ? (
               <ReactCompareSlider
                 defaultValue={50}
-                style={{ width: "100%", height: "auto" }}
+                style={{ width: "100%", height: "auto", objectFit: "contain" }}
                 itemOne={
                   <ReactCompareSliderImage
+                    sizes="contain"
                     src={project.sourceImage}
                     alt="Before rerender image  "
-                    className="compare-img"
+                    className="compare-img object-contain"
                   />
                 }
                 itemTwo={
                   <ReactCompareSliderImage
                     src={currentImage || project?.renderedImage || ""}
                     alt="After rerender image  "
-                    className="compare-img"
+                    className="compare-img object-contain"
                   />
                 }
               />
@@ -287,7 +303,7 @@ const Visualizer = () => {
                   <img
                     src={project.sourceImage}
                     alt="Before Image"
-                    className="compare-img"
+                    className="compare-img object-contain"
                   />
                 )}
               </div>

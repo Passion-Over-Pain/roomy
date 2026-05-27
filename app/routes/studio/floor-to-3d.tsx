@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createProject, getProjects } from "@/lib/puter.action";
 import Upload from "@/components/upload";
 import { Button } from "@/components/ui/button";
+import { dialogService } from "@/lib/services/dialog-service";
 
 export default function FloorTo3D() {
   const [projects, setProjects] = useState<DesignItem[]>([]);
@@ -63,7 +64,6 @@ export default function FloorTo3D() {
 
       <main className="py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          {/* Upload Component Area */}
           <section className="mb-24">
             <Upload onCreateProject={handleCreateProject} />
           </section>
@@ -72,7 +72,10 @@ export default function FloorTo3D() {
           <section>
             <div className="flex items-center justify-between mb-12">
               <h2 className="font-serif text-3xl">Recent Projects</h2>
-              <Button className="flex items-center gap-2 text-sm font-medium">
+              <Button
+                className="flex items-center gap-2 text-sm font-medium"
+                // onClick={() => //TODO: CREATE A PROJECT GALLERY }
+              >
                 <FolderPlus size={16} />
                 View All
               </Button>
