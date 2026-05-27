@@ -1,3 +1,5 @@
+import GridBackground from "../ui/grid-bg";
+
 export function Workflow() {
   const steps = [
     {
@@ -18,7 +20,11 @@ export function Workflow() {
   ];
 
   return (
-    <section id="workflow" className="py-32 bg-surface-soft">
+    <section
+      id="workflow"
+      className="py-32 bg-surface-soft overflow-hidden relative"
+    >
+      <GridBackground />
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Sticky Header */}

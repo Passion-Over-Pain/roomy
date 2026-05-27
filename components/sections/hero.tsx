@@ -1,11 +1,11 @@
 import { Sparkles } from "lucide-react";
 import { Button } from "../ui/button";
+import GridBackground from "@/components/ui/grid-bg";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#FDFBF7]">
-      <div className="absolute top-0 right-0 w-160 h-160 bg-neutral-100 rounded-full blur-[120px] opacity-50" />
-
+    <section className="relative h-screen flex items-center overflow-hidden bg-[#FDFBF7]">
+      <GridBackground />
       <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-32 pb-24 relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div>
@@ -41,7 +41,7 @@ export function Hero() {
             <div className="absolute -top-6 -left-6 w-full h-full border border-black/10" />
             <div className="relative bg-white border border-black/10 shadow-2xl p-2">
               <img
-                src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1400"
+                src="images/ui/hero-bg.jpg"
                 className="w-full h-150 object-cover"
                 alt="Architecture"
               />
@@ -64,7 +64,7 @@ export function Hero() {
               </div>
               <div className="space-y-3">
                 {[
-                  ["Lighting", "Cinematic"],
+                  ["Lighting", "Diffused"],
                   ["Style", "Minimal"],
                   ["Export", "8K PNG"],
                 ].map(([label, val]) => (
