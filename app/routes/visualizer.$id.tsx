@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { generate3DView } from "@/lib/ai.action";
-import { createProject, getProjectById } from "@/lib/puter.action";
-import { Box, Download, RefreshCcw, Share2, X } from "lucide-react";
+import {
+  createProject,
+  getProjectById,
+  deleteProject,
+} from "@/lib/puter.action";
+import { Box, Download, RefreshCcw, Share2, X, OctagonX } from "lucide-react";
+
 import React, { useEffect, useRef, useState } from "react";
 import {
   ReactCompareSlider,
@@ -25,6 +30,7 @@ const Visualizer = () => {
   const [isProjectLoading, setIsProjectLoading] = useState(true);
 
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const [currentImage, setCurrentImage] = useState<string | null>(null);
 
@@ -92,6 +98,21 @@ const Visualizer = () => {
       setIsProcessing(false);
     }
   };
+
+  const handleDelete = async () => {
+    if (!id || !confirm("Are you sure? This action cannot be undone.")) return;
+
+    setIsDeleting(true);
+    const success = await deleteProject(id);
+
+    if (success) {
+      navigate("/studio/floor-to-3d");
+    } else {
+      alert("Failed to delete project.");
+      setIsDeleting(false);
+    }
+  };
+
   useEffect(() => {
     let isMounted = true;
 
@@ -167,6 +188,20 @@ const Visualizer = () => {
             </div>
 
             <div className="panel-actions">
+              <Button
+                size="sm"
+                onClick={handleDelete}
+                disabled={isDeleting}
+                className="delete"
+              >
+                {isDeleting ? (
+                  "Deleting..."
+                ) : (
+                  <>
+                    <OctagonX className="w-4 h-4 mr-2" /> Delete
+                  </>
+                )}
+              </Button>
               <Button
                 size="sm"
                 onClick={handleExport}

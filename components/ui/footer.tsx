@@ -118,7 +118,7 @@ export function Footer() {
             rel="noreferrer"
             className="text-white font-semibold hover:underline"
           >
-            Passion
+            Passion-Over-Pain
           </a>
         </p>
       </div>

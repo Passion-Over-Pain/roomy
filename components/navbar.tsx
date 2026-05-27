@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useOutletContext } from "react-router";
 
 const Navbar = () => {
-  const { isSignedIn, userName, signIn, signOut } =
-    useOutletContext<AuthContext>();
+  const { isSignedIn, signIn, signOut } = useOutletContext<AuthContext>();
 
   const handleAuthClick = async () => {
     if (isSignedIn) {
@@ -40,30 +39,29 @@ const Navbar = () => {
             <a href="#workflow">Workflow</a>
             <a href="#gallery">Gallery</a>
             <a href="#community">Community</a>
+            <a href="coming-soon">Studio</a>
           </ul>
         </div>
 
         <div className="actions">
           {isSignedIn ? (
             <>
-              <span className="greeting">
-                {userName ? `Hi ${userName}` : "Signed In"}
-              </span>
+              <Button size="sm" variant="primary" href="/studio/floor-to-3d">
+                Studio
+              </Button>
               <Button size="sm" variant="outline" onClick={handleAuthClick}>
                 Log out
               </Button>
             </>
           ) : (
             <>
-              <button className="login" onClick={handleAuthClick}>
-                Sign In
-              </button>
               <Button
                 size="md"
-                className="btn--primary"
-                onClick={() => (window.location.href = "#upload")}
+                variant="primary"
+                className="uppercase tracking-wider"
+                onClick={handleAuthClick}
               >
-                Start Building
+                Sign In
               </Button>
             </>
           )}

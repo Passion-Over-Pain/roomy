@@ -6,22 +6,22 @@ export function AboutUs() {
           {/* Images on the Left */}
           <div className="grid grid-cols-2 gap-5">
             <img
-              src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=800"
+              src="images/ui/about-1.jpg"
               className="h-80 w-full object-cover mt-16"
               alt="Concept"
             />
             <img
-              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=800"
+              src="images/ui/about-2.jpg"
               className="h-80 w-full object-cover"
               alt="Detail"
             />
             <img
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800"
+              src="images/ui/about-3.jpg"
               className="h-80 w-full object-cover"
               alt="Architecture"
             />
             <img
-              src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=800"
+              src="images/ui/about-4.jpg"
               className="h-80 w-full object-cover -mt-16"
               alt="Space"
             />

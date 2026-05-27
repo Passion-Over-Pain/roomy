@@ -29,11 +29,6 @@ export function Features() {
                 composition.
               </p>
             </div>
-            <img
-              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1400"
-              className="absolute bottom-0 right-0 w-[60%] h-[50%] object-cover shadow-soft"
-              alt="Rendering preview"
-            />
           </article>
 
           {/* Card 2: Scene Comparison */}
