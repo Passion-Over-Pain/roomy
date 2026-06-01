@@ -5,11 +5,12 @@ import {
   createProject,
   getProjectById,
   deleteProject,
+  updateProject,
 } from "@/lib/puter.action";
 import { dialogService } from "@/lib/services/dialog-service";
 import { Box, Download, RefreshCcw, Share2, X, OctagonX } from "lucide-react";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ReactCompareSlider,
   ReactCompareSliderImage,
@@ -35,13 +36,10 @@ const Visualizer = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const [currentImage, setCurrentImage] = useState<string | null>(null);
+  const [isSharing, setIsSharing] = useState(false);
 
   const handleBack = () => {
     navigate("/");
-  };
-
-  const handleShare = () => {
-    toastService.info("Shareable link functionality coming soon.");
   };
 
   const handleExport = async () => {
@@ -126,6 +124,26 @@ const Visualizer = () => {
         }
       },
     });
+  };
+
+  const handleToggleShare = async () => {
+    if (!project) return;
+
+    const newState = !project.isPublic;
+    setIsSharing(true);
+
+    // Update in background
+    const success = await updateProject(project.id, { isPublic: newState });
+
+    if (success) {
+      setProject({ ...project, isPublic: newState });
+      toastService.success(
+        newState ? "Project is now public" : "Project is now private",
+      );
+    } else {
+      toastService.error("Failed to update privacy settings");
+    }
+    setIsSharing(false);
   };
 
   useEffect(() => {
@@ -227,9 +245,14 @@ const Visualizer = () => {
                 Export
               </Button>
 
-              <Button size="sm" onClick={handleShare} className="share">
+              <Button
+                size="sm"
+                onClick={handleToggleShare}
+                disabled={isSharing}
+                className={project?.isPublic ? "bg-green-600" : "bg-black"}
+              >
                 <Share2 className="w-4 h-4 mr-2" />
-                Share
+                {project?.isPublic ? "Make Private" : "Share Project"}
               </Button>
             </div>
           </div>
