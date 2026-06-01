@@ -181,6 +181,10 @@ export const updateProject = async (
   id: string,
   updates: Partial<DesignItem>,
 ) => {
+  if (!PUTER_WORKER_URL) {
+    console.warn("Missing VITE_PUTER_WORKER_URL; skipping update.");
+    return false;
+  }
   try {
     const response = await puter.workers.exec(
       `${PUTER_WORKER_URL}/api/projects/update`,

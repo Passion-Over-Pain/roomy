@@ -96,7 +96,7 @@ export default function FloorTo3D() {
                       <div className="aspect-4/3 overflow-hidden relative bg-black/5">
                         <img
                           src={project.renderedImage || project.sourceImage}
-                          alt={project.name!}
+                          alt={project.name || `Project ${project.id}`}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
 
