@@ -81,7 +81,6 @@ export default function App() {
 
   const signIn = async (): Promise<boolean> => {
     await puterSignIn();
-    console.log("P");
     return await refreshAuth();
   };
 

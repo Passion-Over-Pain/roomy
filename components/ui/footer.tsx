@@ -28,7 +28,7 @@ export function Footer() {
           <ul className="mt-6 space-y-4 text-white/80 font-medium">
             <li>
               <a
-                href="#about"
+                href="/#about"
                 className="hover:text-white hover:underline transition"
               >
                 About Roomy
@@ -36,7 +36,7 @@ export function Footer() {
             </li>
             <li>
               <a
-                href="#features"
+                href="/#features"
                 className="hover:text-white hover:underline transition"
               >
                 Features
@@ -44,7 +44,7 @@ export function Footer() {
             </li>
             <li>
               <a
-                href="#process"
+                href="/#process"
                 className="hover:text-white hover:underline transition"
               >
                 Workflow
@@ -52,7 +52,7 @@ export function Footer() {
             </li>
             <li>
               <a
-                href="#gallery"
+                href="/#gallery"
                 className="hover:text-white hover:underline transition"
               >
                 Gallery
@@ -60,7 +60,7 @@ export function Footer() {
             </li>
             <li>
               <a
-                href="#community"
+                href="/#community"
                 className="hover:text-white hover:underline transition"
               >
                 Community

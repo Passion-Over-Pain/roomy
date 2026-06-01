@@ -131,15 +131,11 @@ export const getProjectById = async ({ id }: { id: string }) => {
     return null;
   }
 
-  console.log("Fetching project with ID:", id);
-
   try {
     const response = await puter.workers.exec(
       `${PUTER_WORKER_URL}/api/projects/get?id=${encodeURIComponent(id)}`,
       { method: "GET" },
     );
-
-    console.log("Fetch project response:", response);
 
     if (!response.ok) {
       console.error("Failed to fetch project:", await response.text());
@@ -149,8 +145,6 @@ export const getProjectById = async ({ id }: { id: string }) => {
     const data = (await response.json()) as {
       project?: DesignItem | null;
     };
-
-    console.log("Fetched project data:", data);
 
     return data?.project ?? null;
   } catch (error) {
@@ -179,6 +173,26 @@ export const deleteProject = async (id: string): Promise<boolean> => {
     return data?.success ?? false;
   } catch (e) {
     console.error("Delete action failed:", e);
+    return false;
+  }
+};
+
+export const updateProject = async (
+  id: string,
+  updates: Partial<DesignItem>,
+) => {
+  try {
+    const response = await puter.workers.exec(
+      `${PUTER_WORKER_URL}/api/projects/update`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, updates }),
+      },
+    );
+    return response.ok;
+  } catch (e) {
+    console.error("Update failed:", e);
     return false;
   }
 };
