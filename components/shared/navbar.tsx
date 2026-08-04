@@ -39,7 +39,6 @@ const Navbar = () => {
             <a href="#workflow">Workflow</a>
             <a href="#gallery">Gallery</a>
             <a href="#community">Community</a>
-            <a href="coming-soon">Studio</a>
           </ul>
         </div>
 

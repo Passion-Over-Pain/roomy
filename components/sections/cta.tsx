@@ -15,7 +15,7 @@ export function Cta() {
           to accelerate design communication.
         </p>
         <div className="mt-12 flex flex-wrap justify-center gap-5">
-          <Button variant="primary" size="lg">
+          <Button variant="primary" size="lg" href="/studio/floor-to-3d">
             Start Building
           </Button>
         </div>

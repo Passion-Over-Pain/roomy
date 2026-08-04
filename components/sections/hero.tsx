@@ -27,12 +27,12 @@ export function Hero() {
             </p>
 
             <div className="flex gap-4">
-              <Button variant="primary" size="lg">
+              <Button variant="primary" size="lg" href="/studio/floor-to-3d">
                 Start Building
               </Button>
-              <Button variant="outline" size="lg">
+              {/* <Button variant="outline" size="lg">
                 Watch Demo
-              </Button>
+              </Button> */}
             </div>
           </div>
 

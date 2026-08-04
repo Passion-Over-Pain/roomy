@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 
 export function Community() {
+  const communityImages = [
+    "images/ui/community-1.webp",
+    "images/ui/community-2.webp",
+    "images/ui/community-3.webp",
+    "images/ui/community-4.webp",
+  ];
   return (
     <section id="community" className="py-32 bg-black text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -23,11 +29,11 @@ export function Community() {
           </div>
 
           <div className="grid grid-cols-2 gap-5">
-            {[1, 2, 3, 4].map((i) => (
+            {communityImages.map((image, index) => (
               <img
-                key={i}
-                src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1200"
-                className={`h-80 w-full object-cover ${i === 2 || i === 3 ? "-mt-16" : ""}`}
+                key={index}
+                src={image}
+                className={`h-80 w-full object-cover ${index === 2 || index === 3 ? "-mt-16" : ""}`}
                 alt="Community work"
               />
             ))}

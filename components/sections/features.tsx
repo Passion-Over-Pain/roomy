@@ -48,7 +48,7 @@ export function Features() {
             <div className="grid grid-cols-2 gap-4 mt-10">
               <div className="bg-surface-soft p-4 border">
                 <img
-                  src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=600"
+                  src="/images/ui/floor1.webp"
                   className="h-32 w-full object-cover"
                   alt="Original"
                 />
@@ -58,7 +58,7 @@ export function Features() {
               </div>
               <div className="bg-black p-4">
                 <img
-                  src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=600"
+                  src="/images/ui/gen3.png"
                   className="h-32 w-full object-cover"
                   alt="Render"
                 />
